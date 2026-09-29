@@ -189,11 +189,9 @@ export default function LoginPage() {
   window.location.href = "/dashboard/index.html";
 };
 
-  const handleGoogleLogin = () => {
-    showMessage(
-      "Google sign-in will be connected with Firebase."
-    );
-  };
+ const handleGoogleLogin = () => {
+  window.location.href = "/dashboard/index.html";
+};
 
   const handleGoogleSignup = () => {
     showMessage(
