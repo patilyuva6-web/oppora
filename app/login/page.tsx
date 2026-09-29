@@ -98,7 +98,7 @@ export default function LoginPage() {
       return;
     }
 
-    showMessage("Login details are valid.", true);
+    window.location.href = "/dashboard/index.html";
   };
 
   const handleCreateAccount = () => {
@@ -780,6 +780,7 @@ export default function LoginPage() {
                 ))}
 
               </div>
+              
 
               {errors.otp && (
                 <div className="otp-error">

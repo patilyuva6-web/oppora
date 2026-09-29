@@ -1,4 +1,7 @@
-"use client";
+const handleGoogleLogin = () => {
+  // Demo Google login — Firebase will be connected later
+  window.location.href = "/dashboard/index.html";
+};"use client";
 
 import { useState } from "react";
 
