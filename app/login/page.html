@@ -1,0 +1,1288 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oppora Authentication</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f7f7f8;
+  color: #171719;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* PAGE */
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 15px;
+}
+
+.container {
+  width: 100%;
+  max-width: 430px;
+  text-align: center;
+}
+
+/* LOGO */
+
+.logo {
+  font-size: 43px;
+  font-weight: 800;
+  letter-spacing: -4px;
+  margin-bottom: 22px;
+}
+
+.logo span:nth-child(1) { color: #ff5c8a; }
+.logo span:nth-child(2) { color: #ffb84d; }
+.logo span:nth-child(3) { color: #ffe34f; }
+.logo span:nth-child(4) { color: #64d8cb; }
+.logo span:nth-child(5) { color: #65a8ff; }
+.logo span:nth-child(6) { color: #9b7aff; }
+.logo span:nth-child(7) { color: #171719; }
+
+/* HEADING */
+
+.heading {
+  margin-bottom: 24px;
+}
+
+.heading h1 {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+
+  background: linear-gradient(90deg, #111, #6842ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.heading p {
+  margin-top: 8px;
+  color: #777780;
+  font-size: 14px;
+}
+
+/* CARD */
+
+.card {
+  background: white;
+  border: 1px solid #e7e7eb;
+  border-radius: 24px;
+  padding: 30px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.08);
+  text-align: left;
+}
+
+/* GOOGLE */
+
+.google-btn {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #dedee3;
+  border-radius: 12px;
+  background: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  font-size: 13px;
+  font-weight: 700;
+  color: #242428;
+
+  transition: .2s;
+}
+
+.google-btn:hover {
+  background: #fafafa;
+  transform: translateY(-1px);
+}
+
+.google-logo {
+  width: 19px;
+}
+
+/* DIVIDER */
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 23px 0;
+}
+
+.divider span {
+  flex: 1;
+  height: 1px;
+  background: #e8e8eb;
+}
+
+.divider p {
+  font-size: 9px;
+  font-weight: 800;
+  color: #9999a2;
+  white-space: nowrap;
+}
+
+/* INPUT */
+
+.group {
+  margin-bottom: 17px;
+}
+
+.group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 7px;
+  color: #333338;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.group input {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #dedee4;
+  border-radius: 11px;
+  padding: 0 14px;
+  outline: none;
+  background: #fafafa;
+  font-size: 13px;
+  color: #171719;
+  transition: .2s;
+}
+
+.group input:focus {
+  background: white;
+  border-color: #6842ff;
+  box-shadow: 0 0 0 3px rgba(104,66,255,.08);
+}
+
+.group input.error {
+  border-color: #ef4444 !important;
+  background: #fffafa;
+}
+
+.error-text {
+  display: block;
+  color: #ef4444;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+/* PASSWORD */
+
+.password-input {
+  padding-right: 62px !important;
+}
+
+.show-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  border: 0;
+  background: transparent;
+  color: #6842ff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* MAIN BUTTON */
+
+.main-btn {
+  width: 100%;
+  height: 50px;
+  margin-top: 5px;
+
+  border: 0;
+  border-radius: 12px;
+
+  background: #171719;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  transition: .2s;
+}
+
+.main-btn:hover {
+  background: #6842ff;
+  transform: translateY(-1px);
+}
+
+.main-btn strong {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+/* SWITCH */
+
+.switch-text {
+  text-align: center;
+  margin-top: 20px;
+  color: #85858d;
+  font-size: 12px;
+}
+
+.switch-text a {
+  color: #6842ff;
+  font-weight: 800;
+}
+
+/* OTP */
+
+.otp-screen {
+  display: none;
+}
+
+.otp-description {
+  color: #777780;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.otp-underlines {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0 25px;
+}
+
+.otp-input {
+  width: 48px;
+  height: 45px;
+
+  border: 0;
+  border-bottom: 2px solid #cfcfd5;
+
+  background: transparent;
+
+  outline: none;
+
+  text-align: center;
+
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.otp-input:focus {
+  border-bottom-color: #6842ff;
+}
+
+.otp-error {
+  text-align: center;
+  color: #ef4444;
+  font-size: 11px;
+  font-weight: 600;
+  min-height: 18px;
+}
+
+/* BACK */
+
+.back-btn {
+  width: 100%;
+  margin-top: 14px;
+  border: 0;
+  background: transparent;
+  color: #777780;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* FOOTER */
+
+.footer {
+  margin-top: 18px;
+  color: #9999a1;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+/* POPUP */
+
+.popup {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  min-width: 280px;
+  max-width: calc(100% - 30px);
+
+  padding: 13px 17px;
+
+  background: #171719;
+  color: white;
+
+  border-radius: 12px;
+
+  display: none;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  box-shadow: 0 15px 40px rgba(0,0,0,.18);
+
+  z-index: 1000;
+}
+
+.popup-icon {
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+
+  display: grid;
+  place-items: center;
+
+  background: #ef4444;
+  flex-shrink: 0;
+}
+
+.popup.success .popup-icon {
+  background: #2fa563;
+}
+
+@media(max-width:500px) {
+
+  .card {
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+
+  .heading h1 {
+    font-size: 30px;
+  }
+
+  .logo {
+    font-size: 38px;
+  }
+
+  .otp-underlines {
+    gap: 10px;
+  }
+
+  .otp-input {
+    width: 43px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+<div class="container">
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <span class="popup-icon" id="popupIcon">!</span>
+  <span id="popupMessage"></span>
+</div>
+
+
+<!-- ================= LOGIN ================= -->
+
+<section id="loginScreen">
+
+<div class="logo">
+  <span>o</span><span>p</span><span>p</span>
+  <span>o</span><span>r</span><span>a</span><span>.</span>
+</div>
+
+<div class="heading">
+  <h1>Welcome back</h1>
+  <p>Sign in to discover your next opportunity.</p>
+</div>
+
+<div class="card">
+
+<button class="google-btn" onclick="googleLogin()">
+
+<svg class="google-logo" viewBox="0 0 24 24">
+<path fill="#4285F4"
+d="M21.35 12.27c0-.72-.06-1.42-.18-2.09H12v3.96h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.7 2.91-4.2 2.91-7.26z"/>
+<path fill="#34A853"
+d="M12 21.75c2.63 0 4.84-.87 6.45-2.35l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.54 0-4.7-1.72-5.47-4.03H3.29v2.53A9.75 9.75 0 0 0 12 21.75z"/>
+<path fill="#FBBC05"
+d="M6.53 13.84A5.86 5.86 0 0 1 6.22 12c0-.64.11-1.26.31-1.84V7.63H3.29A9.74 9.74 0 0 0 2.25 12c0 1.57.38 3.05 1.04 4.37l3.24-2.53z"/>
+<path fill="#EA4335"
+d="M12 6.13c1.43 0 2.71.49 3.72 1.46l2.79-2.79C16.83 3.25 14.63 2.25 12 2.25a9.75 9.75 0 0 0-8.71 5.38l3.24 2.53C7.3 7.85 9.46 6.13 12 6.13z"/>
+</svg>
+
+Continue with Google
+
+</button>
+
+<div class="divider">
+<span></span>
+<p>OR CONTINUE WITH EMAIL</p>
+<span></span>
+</div>
+
+<div class="group">
+
+<label>Mobile number or email</label>
+
+<input
+id="loginIdentifier"
+placeholder="Mobile number or email"
+>
+
+<small class="error-text" id="loginIdentifierError"></small>
+
+</div>
+
+
+<div class="group">
+
+<label>Password</label>
+
+<div class="input-wrap">
+
+<input
+id="loginPassword"
+class="password-input"
+type="password"
+placeholder="Enter your password"
+>
+
+<button
+class="show-btn"
+onclick="toggleLoginPassword()"
+type="button"
+>
+Show
+</button>
+
+</div>
+
+<small class="error-text" id="loginPasswordError"></small>
+
+</div>
+
+
+<button class="main-btn" onclick="login()">
+Sign in <strong>→</strong>
+</button>
+
+
+<p class="switch-text">
+Don't have an account?
+<a href="#" onclick="showSignup();return false;">
+Create one
+</a>
+</p>
+
+</div>
+
+<p class="footer">
+By continuing, you agree to Oppora's Terms & Privacy Policy.
+</p>
+
+</section>
+
+
+<!-- ================= SIGNUP ================= -->
+
+<section id="signupScreen" style="display:none;">
+
+<div class="logo">
+<span>o</span><span>p</span><span>p</span>
+<span>o</span><span>r</span><span>a</span><span>.</span>
+</div>
+
+<div class="heading">
+
+<h1>Create account</h1>
+
+<p>
+Join Oppora and discover your next opportunity.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<button class="google-btn" onclick="googleSignup()">
+
+<svg class="google-logo" viewBox="0 0 24 24">
+<path fill="#4285F4"
+d="M21.35 12.27c0-.72-.06-1.42-.18-2.09H12v3.96h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.7 2.91-4.2 2.91-7.26z"/>
+<path fill="#34A853"
+d="M12 21.75c2.63 0 4.84-.87 6.45-2.35l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.54 0-4.7-1.72-5.47-4.03H3.29v2.53A9.75 9.75 0 0 0 12 21.75z"/>
+<path fill="#FBBC05"
+d="M6.53 13.84A5.86 5.86 0 0 1 6.22 12c0-.64.11-1.26.31-1.84V7.63H3.29A9.74 9.74 0 0 0 2.25 12c0 1.57.38 3.05 1.04 4.37l3.24-2.53z"/>
+<path fill="#EA4335"
+d="M12 6.13c1.43 0 2.71.49 3.72 1.46l2.79-2.79C16.83 3.25 14.63 2.25 12 2.25a9.75 9.75 0 0 0-8.71 5.38l3.24 2.53C7.3 7.85 9.46 6.13 12 6.13z"/>
+</svg>
+
+Continue with Google
+
+</button>
+
+
+<div class="divider">
+<span></span>
+<p>OR CREATE WITH EMAIL</p>
+<span></span>
+</div>
+
+
+<!-- NAME -->
+
+<div class="group">
+
+<label>Full name</label>
+
+<input
+id="fullName"
+placeholder="Enter your full name"
+>
+
+<small class="error-text" id="nameError"></small>
+
+</div>
+
+
+<!-- IDENTIFIER -->
+
+<div class="group">
+
+<label>Mobile number or email</label>
+
+<input
+id="signupIdentifier"
+placeholder="Mobile number or email"
+>
+
+<small class="error-text" id="signupIdentifierError"></small>
+
+</div>
+
+
+<!-- PASSWORD -->
+
+<div class="group">
+
+<label>Password</label>
+
+<div class="input-wrap">
+
+<input
+id="signupPassword"
+class="password-input"
+type="password"
+placeholder="Create a strong password"
+>
+
+<button
+class="show-btn"
+onclick="toggleSignupPassword()"
+type="button"
+>
+Show
+</button>
+
+</div>
+
+<small class="error-text" id="signupPasswordError"></small>
+
+</div>
+
+
+<!-- CONFIRM -->
+
+<div class="group">
+
+<label>Confirm password</label>
+
+<div class="input-wrap">
+
+<input
+id="confirmPassword"
+class="password-input"
+type="password"
+placeholder="Confirm your password"
+>
+
+<button
+class="show-btn"
+onclick="toggleConfirmPassword()"
+type="button"
+>
+Show
+</button>
+
+</div>
+
+<small class="error-text" id="confirmPasswordError"></small>
+
+</div>
+
+
+<button
+class="main-btn"
+onclick="createAccount()"
+>
+Create account <strong>→</strong>
+</button>
+
+
+<p class="switch-text">
+
+Already have an account?
+
+<a
+href="#"
+onclick="showLogin();return false;"
+>
+Sign in
+</a>
+
+</p>
+
+</div>
+
+<p class="footer">
+By continuing, you agree to Oppora's Terms & Privacy Policy.
+</p>
+
+</section>
+
+
+<!-- ================= OTP ================= -->
+
+<section id="otpScreen" class="otp-screen">
+
+<div class="logo">
+<span>o</span><span>p</span><span>p</span>
+<span>o</span><span>r</span><span>a</span><span>.</span>
+</div>
+
+<div class="heading">
+
+<h1>Enter OTP</h1>
+
+<p>
+Enter the verification code sent to your mobile number or email.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<p class="otp-description">
+We need to verify your account before creating it.
+</p>
+
+
+<div class="otp-underlines">
+
+<input
+class="otp-input"
+maxlength="1"
+inputmode="numeric"
+oninput="otpNext(this,0)"
+>
+
+<input
+class="otp-input"
+maxlength="1"
+inputmode="numeric"
+oninput="otpNext(this,1)"
+>
+
+<input
+class="otp-input"
+maxlength="1"
+inputmode="numeric"
+oninput="otpNext(this,2)"
+>
+
+<input
+class="otp-input"
+maxlength="1"
+inputmode="numeric"
+oninput="otpNext(this,3)"
+>
+
+</div>
+
+
+<div
+class="otp-error"
+id="otpError"
+></div>
+
+
+<button
+class="main-btn"
+onclick="verifyOTP()"
+>
+Verify & Create Account <strong>→</strong>
+</button>
+
+
+<button
+class="back-btn"
+onclick="backToSignup()"
+>
+← Back to Create Account
+</button>
+
+</div>
+
+</section>
+
+</div>
+</div>
+
+
+<script>
+
+/* =========================
+   POPUP
+========================= */
+
+let popupTimer;
+
+function showPopup(message, success=false) {
+
+const popup =
+document.getElementById("popup");
+
+const messageBox =
+document.getElementById("popupMessage");
+
+const icon =
+document.getElementById("popupIcon");
+
+messageBox.textContent = message;
+
+icon.textContent =
+success ? "✓" : "!";
+
+popup.classList.toggle(
+"success",
+success
+);
+
+popup.style.display = "flex";
+
+clearTimeout(popupTimer);
+
+popupTimer = setTimeout(() => {
+
+popup.style.display = "none";
+
+},3000);
+
+}
+
+
+/* =========================
+   SCREEN SWITCH
+========================= */
+
+function showLogin() {
+
+document.getElementById("loginScreen").style.display="block";
+
+document.getElementById("signupScreen").style.display="none";
+
+document.getElementById("otpScreen").style.display="none";
+
+}
+
+
+function showSignup() {
+
+document.getElementById("loginScreen").style.display="none";
+
+document.getElementById("signupScreen").style.display="block";
+
+document.getElementById("otpScreen").style.display="none";
+
+}
+
+
+function showOTP() {
+
+document.getElementById("loginScreen").style.display="none";
+
+document.getElementById("signupScreen").style.display="none";
+
+document.getElementById("otpScreen").style.display="block";
+
+setTimeout(() => {
+
+document.querySelector(".otp-input").focus();
+
+},100);
+
+}
+
+
+/* =========================
+   SIGNUP VALIDATION
+========================= */
+
+function validateIdentifier(value) {
+
+value=value.trim();
+
+if(!value)
+return "Mobile number or email is required.";
+
+const mobile =
+/^[6-9][0-9]{9}$/;
+
+const email =
+/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+if(
+!mobile.test(value) &&
+!email.test(value)
+)
+return "Enter a valid 10-digit mobile number or email.";
+
+return "";
+
+}
+
+
+function validatePassword(value) {
+
+if(!value)
+return "Password is required.";
+
+if(value.length < 8)
+return "Password must contain at least 8 characters.";
+
+if(!/[A-Z]/.test(value))
+return "Password needs an uppercase letter.";
+
+if(!/[a-z]/.test(value))
+return "Password needs a lowercase letter.";
+
+if(!/[0-9]/.test(value))
+return "Password needs a number.";
+
+if(!/[!@#$%^&*(),.?":{}|<>_\-+=;'`~\/\\[\]]/.test(value))
+return "Password needs a special character.";
+
+return "";
+
+}
+
+
+/* =========================
+   CREATE ACCOUNT
+========================= */
+
+function createAccount() {
+
+const name =
+document.getElementById("fullName");
+
+const identifier =
+document.getElementById("signupIdentifier");
+
+const password =
+document.getElementById("signupPassword");
+
+const confirm =
+document.getElementById("confirmPassword");
+
+
+let valid=true;
+
+
+/* NAME */
+
+if(!name.value.trim()) {
+
+document.getElementById("nameError").textContent =
+"Full name is required.";
+
+name.classList.add("error");
+
+valid=false;
+
+} else {
+
+document.getElementById("nameError").textContent="";
+name.classList.remove("error");
+
+}
+
+
+/* IDENTIFIER */
+
+const identifierError =
+validateIdentifier(identifier.value);
+
+document.getElementById("signupIdentifierError").textContent =
+identifierError;
+
+identifier.classList.toggle(
+"error",
+!!identifierError
+);
+
+if(identifierError)
+valid=false;
+
+
+/* PASSWORD */
+
+const passwordError =
+validatePassword(password.value);
+
+document.getElementById("signupPasswordError").textContent =
+passwordError;
+
+password.classList.toggle(
+"error",
+!!passwordError
+);
+
+if(passwordError)
+valid=false;
+
+
+/* CONFIRM PASSWORD */
+
+let confirmError="";
+
+if(!confirm.value) {
+
+confirmError =
+"Please confirm your password.";
+
+}
+
+else if(confirm.value !== password.value) {
+
+confirmError =
+"Passwords do not match.";
+
+}
+
+document.getElementById("confirmPasswordError").textContent =
+confirmError;
+
+confirm.classList.toggle(
+"error",
+!!confirmError
+);
+
+if(confirmError)
+valid=false;
+
+
+/* STOP IF INVALID */
+
+if(!valid) {
+
+showPopup(
+"Please fix the highlighted fields."
+);
+
+return;
+
+}
+
+
+/* EVERYTHING VALID */
+
+showOTP();
+
+showPopup(
+"Details verified. Enter the OTP."
+);
+
+}
+
+
+/* =========================
+   OTP
+========================= */
+
+function otpNext(input,index) {
+
+input.value =
+input.value.replace(/[^0-9]/g,"");
+
+const inputs =
+document.querySelectorAll(".otp-input");
+
+if(input.value && index < 3) {
+
+inputs[index + 1].focus();
+
+}
+
+}
+
+
+/* =========================
+   OTP VERIFY
+========================= */
+
+function verifyOTP() {
+
+const inputs =
+document.querySelectorAll(".otp-input");
+
+let otp="";
+
+inputs.forEach(input => {
+
+otp += input.value;
+
+});
+
+
+if(otp.length !== 4) {
+
+document.getElementById("otpError").textContent =
+"Please enter all 4 OTP digits.";
+
+showPopup(
+"Enter the complete OTP."
+);
+
+return;
+
+}
+
+
+/*
+  IMPORTANT:
+
+  We are NOT using a fake OTP here.
+
+  Firebase OTP verification
+  will be connected here later.
+*/
+
+showPopup(
+"OTP entered. Firebase verification will be connected next.",
+true
+);
+
+}
+
+
+/* =========================
+   BACK
+========================= */
+
+function backToSignup() {
+
+document.getElementById("otpScreen").style.display="none";
+
+document.getElementById("signupScreen").style.display="block";
+
+}
+
+
+/* =========================
+   PASSWORD TOGGLE
+========================= */
+
+function toggleSignupPassword() {
+
+const input =
+document.getElementById("signupPassword");
+
+const button =
+input.parentElement.querySelector(".show-btn");
+
+if(input.type==="password") {
+
+input.type="text";
+button.textContent="Hide";
+
+} else {
+
+input.type="password";
+button.textContent="Show";
+
+}
+
+}
+
+
+function toggleConfirmPassword() {
+
+const input =
+document.getElementById("confirmPassword");
+
+const button =
+input.parentElement.querySelector(".show-btn");
+
+if(input.type==="password") {
+
+input.type="text";
+button.textContent="Hide";
+
+} else {
+
+input.type="password";
+button.textContent="Show";
+
+}
+
+}
+
+
+function toggleLoginPassword() {
+
+const input =
+document.getElementById("loginPassword");
+
+const button =
+input.parentElement.querySelector(".show-btn");
+
+if(input.type==="password") {
+
+input.type="text";
+button.textContent="Hide";
+
+} else {
+
+input.type="password";
+button.textContent="Show";
+
+}
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function login() {
+
+const identifier =
+document.getElementById("loginIdentifier");
+
+const password =
+document.getElementById("loginPassword");
+
+const identifierError =
+validateIdentifier(identifier.value);
+
+const passwordError =
+validatePassword(password.value);
+
+
+document.getElementById("loginIdentifierError").textContent =
+identifierError;
+
+document.getElementById("loginPasswordError").textContent =
+passwordError;
+
+identifier.classList.toggle(
+"error",
+!!identifierError
+);
+
+password.classList.toggle(
+"error",
+!!passwordError
+);
+
+
+if(identifierError || passwordError) {
+
+showPopup(
+"Please fix the highlighted fields."
+);
+
+return;
+
+}
+
+showPopup(
+"Login details are valid.",
+true
+);
+
+}
+
+
+/* =========================
+   GOOGLE
+========================= */
+
+function googleLogin() {
+
+showPopup(
+"Google sign-in will be connected with Firebase."
+);
+
+}
+
+
+function googleSignup() {
+
+showPopup(
+"Google sign-up will be connected with Firebase."
+);
+
+}
+
+</script>
+
+</body>
+</html>
